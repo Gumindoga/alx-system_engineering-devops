@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -p -c | grep -v / | tr '\n' ','
+ls -a -c -m
