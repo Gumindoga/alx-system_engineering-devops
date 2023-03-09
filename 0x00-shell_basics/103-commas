@@ -1,2 +1,2 @@
 #!/bin/bash
-printf '%s\n' $(ls -1pF | grep -v / | sort -d | sed 's/$/,/') $(ls -dpF .*/ */ | sed 's/$/,/')
+ls -p -c | grep -v / | tr '\n' ','
