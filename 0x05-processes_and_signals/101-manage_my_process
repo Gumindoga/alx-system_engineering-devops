@@ -26,9 +26,14 @@ stop)
 	fi
 	;;
 restart)
-	$0 stop
-	$0 start
-	echo "manage_my_process restarted"
+	if [ -e "$PID_FILE" ]; then
+		$0 stop
+		$0 start
+		echo "manage_my_process restarted"
+	else
+		echo "manage_my_process is not running. Starting it."
+		$0 start
+	fi
 	;;
 *)
 	echo "Usage: $0 {start|stop|restart}"

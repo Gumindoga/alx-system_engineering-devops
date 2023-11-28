@@ -2,14 +2,4 @@
 # Script: 6-stop_me_if_you_can
 # Description: Stops the 4-to_infinity_and_beyond process.
 
-# Find the PID of the 4-to_infinity_and_beyond process
-pid=$(pgrep -f "4-to_infinity_and_beyond")
-
-if [ -n "$pid" ]; then
-    # Send a custom signal to stop the process
-    kill -USR1 "$pid"
-    echo "Sent signal to stop 4-to_infinity_and_beyond process"
-else
-    echo "4-to_infinity_and_beyond process not found"
-fi
-
+pkill -f 4-to_infinity_and_beyond

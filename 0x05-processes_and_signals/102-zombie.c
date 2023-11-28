@@ -23,13 +23,11 @@ int main(void)
 
 		if (child_pid > 0)
 		{
-			// Parent process
 			printf("Zombie process created, PID: %d\n", child_pid);
-			sleep(1); // Adding a short delay to ensure each process gets printed
+			sleep(1);
 		}
 		else if (child_pid == 0)
 		{
-			// Child process
 			exit(0);
 		}
 		else
@@ -39,6 +37,6 @@ int main(void)
 		}
 	}
 
-	infinite_while(); // Infinite loop to keep the program running
+	infinite_while();
 	return (0);
 }
