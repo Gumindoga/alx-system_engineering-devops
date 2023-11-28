@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 # This script displays the content of the current directory in a list format
 # Only the part of the name after the first dash is displayed
+FILES=$(ls)
 
-for file in *; do
-	if [[ $file == *-* ]]; then
-		echo ${file#*-}
-	fi
+for file in ${FILES}
+do
+    filename=$(echo "$file" | cut -d '-' -f2-)
+    echo "$filename"
 done
