@@ -2,41 +2,25 @@
 # Script: 101-manage_my_process
 # Description: Manages the manage_my_process script.
 
-PID_FILE="/var/run/my_process.pid"
-SCRIPT_PATH="./manage_my_process"
-
 case "$1" in
 start)
-	if [ -e "$PID_FILE" ]; then
-		echo "manage_my_process is already running. Use 'restart' to restart it."
-	else
-		nohup $SCRIPT_PATH >/dev/null 2>&1 &
-		echo $! >"$PID_FILE"
-		echo "manage_my_process started"
-	fi
+	./manage_my_process &
+	echo $! >/var/run/my_process.pid
+	echo "manage_my_process started"
 	;;
 stop)
-	if [ -e "$PID_FILE" ]; then
-		pid=$(cat "$PID_FILE")
-		kill "$pid"
-		rm -f "$PID_FILE"
-		echo "manage_my_process stopped"
-	else
-		echo "manage_my_process is not running."
-	fi
+	kill $(cat /var/run/my_process.pid)
+	rm /var/run/my_process.pid
+	echo "manage_my_process stopped"
 	;;
 restart)
-	if [ -e "$PID_FILE" ]; then
-		$0 stop
-		$0 start
-		echo "manage_my_process restarted"
-	else
-		echo "manage_my_process is not running. Starting it."
-		$0 start
-	fi
+	kill $(cat /var/run/my_process.pid)
+	rm /var/run/my_process.pid
+	./manage_my_process &
+	echo $! >/var/run/my_process.pid
+	echo "manage_my_process restarted"
 	;;
 *)
-	echo "Usage: $0 {start|stop|restart}"
-	exit 1
+	echo "Usage: manage_my_process {start|stop|restart}"
 	;;
 esac
