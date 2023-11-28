@@ -1,1 +1,1 @@
-# Shell, Basics Project
+# DevOps Main Directory
